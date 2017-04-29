@@ -35,7 +35,7 @@ public class HelloServlet extends HttpServlet
         response.getWriter().println("session=" + request.getSession(true).getId());
     }
 
-    private static boolean isInteger(String s) {
+    boolean isInteger(String s) {
         int radix = 9;
         return s != null &&
                s.matches("^-?\\d+$") &&
