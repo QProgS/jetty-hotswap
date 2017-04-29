@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 public class SomeTest
 {
-    private HelloServlet helloServlet = new HelloServlet();
+    private HelloServlet helloServlet = new HelloServlet("Hello");
 
     @Test
     public void testInt(){
@@ -22,5 +22,13 @@ public class SomeTest
     @Test
     public void testNoInt(){
         assertFalse(helloServlet.isInteger("dfsd"));
+    }
+
+    @Test
+    public void testContent(){
+        String content = helloServlet.getContent("1", "2");
+        assertTrue(content.contains("<h1>Hello</h1>"));
+        assertTrue(content.contains("sum = "));
+        assertTrue(content.contains("times = "));
     }
 }
