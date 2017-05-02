@@ -14,8 +14,6 @@ public class HelloServlet extends HttpServlet
 
     private String greeting="Hello World";
 
-    public HelloServlet(){}
-
     public HelloServlet(String greeting)
     {
         this.greeting=greeting;
