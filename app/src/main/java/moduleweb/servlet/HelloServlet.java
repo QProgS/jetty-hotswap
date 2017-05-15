@@ -2,21 +2,23 @@ package moduleweb.servlet;
 
 import moduleweb.testservice.Calc;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Singleton
 public class HelloServlet extends HttpServlet
 {
-    private Calc calc = new Calc();
+    private Calc calc;
 
-    private String greeting="Hello World";
-
-    public HelloServlet(String greeting)
+    @Inject
+    public HelloServlet(Calc calc)
     {
-        this.greeting=greeting;
+        this.calc = calc;
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -27,7 +29,7 @@ public class HelloServlet extends HttpServlet
     }
 
     String getContent(String sA, String sB){
-        StringBuilder sb = new StringBuilder("<h1>"+greeting+"</h1><br>");
+        StringBuilder sb = new StringBuilder("<h1>Hello</h1><br>");
         if(isInteger(sA) && isInteger(sB)){
             int a = Integer.parseInt(sA);
             int b = Integer.parseInt(sB);

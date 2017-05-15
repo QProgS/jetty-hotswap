@@ -1,5 +1,9 @@
 package moduleweb.servlet;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import moduleweb.ServerModule;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import javax.servlet.ServletException;
@@ -18,7 +22,13 @@ import static org.mockito.Mockito.when;
 
 public class SomeTest
 {
-    private HelloServlet helloServlet = new HelloServlet("Hello");
+    private static HelloServlet helloServlet;
+
+    @BeforeClass
+    public static void init(){
+        Injector injector = Guice.createInjector(new ServerModule());
+        helloServlet = injector.getInstance(HelloServlet.class);
+    }
 
     @Test
     public void testInt(){
