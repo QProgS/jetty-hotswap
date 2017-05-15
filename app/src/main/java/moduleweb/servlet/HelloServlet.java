@@ -1,24 +1,24 @@
 package moduleweb.servlet;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import moduleweb.ServerModule;
 import moduleweb.testservice.Calc;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Singleton
 public class HelloServlet extends HttpServlet
 {
     private Calc calc;
 
-    @Inject
-    public HelloServlet(Calc calc)
+    public HelloServlet()
     {
-        this.calc = calc;
+        Injector injector = Guice.createInjector(new ServerModule());
+        this.calc = injector.getInstance(Calc.class);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
